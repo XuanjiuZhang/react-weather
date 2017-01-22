@@ -3,11 +3,12 @@
  */
 const path = require('path');
 const webpack = require('webpack');
+var OpenBrowserPlugin = require('open-browser-webpack-plugin');
 /*const CleanPlugin = require('clean-webpack-plugin');*/
 
 module.exports = {
   entry: {
-    app: ['./src/app.js']
+    app: ['whatwg-fetch', './src/app.js']
   },
   output: {
     path: path.join(__dirname, 'build'),
@@ -25,7 +26,8 @@ module.exports = {
   plugins: [
     /*// 在打包前清空 build/ 文件夹
     new CleanPlugin('./build/'),*/
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new OpenBrowserPlugin({ url: 'http://localhost:8080' })
   ],
   resolve: {
     extensions: ['', '.js', '.jsx', '.css', '.less']
